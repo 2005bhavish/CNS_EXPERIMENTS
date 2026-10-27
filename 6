@@ -1,0 +1,33 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class RSALogic {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int p = 11;
+        int q = 13;
+
+        BigInteger n = BigInteger.valueOf(p * q);
+        BigInteger phi = BigInteger.valueOf((p - 1) * (q - 1));
+        BigInteger e = BigInteger.valueOf(7);
+        BigInteger d = e.modInverse(phi);
+
+        System.out.print("Enter a number to encrypt: ");
+        BigInteger message = sc.nextBigInteger();
+
+        BigInteger encrypted = message.modPow(e, n);
+        BigInteger decrypted = encrypted.modPow(d, n);
+
+        System.out.println("Public key: (" + e + ", " + n + ")");
+        System.out.println("Private key: (" + d + ", " + n + ")");
+        System.out.println("Encrypted: " + encrypted);
+        System.out.println("Decrypted: " + decrypted);
+    }
+}
+
+// Enter a number to encrypt: 9
+// Public key: (7, 143)
+// Private key: (103, 143)
+// Encrypted: 48
+// Decrypted: 9

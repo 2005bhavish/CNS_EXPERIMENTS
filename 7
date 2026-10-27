@@ -1,0 +1,35 @@
+import java.security.*;
+import javax.crypto.Cipher;
+import java.util.Base64;
+import java.util.Scanner;
+
+public class RSAExample {
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter text: ");
+        String text = sc.nextLine();
+
+        KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+        generator.initialize(2048);
+
+        KeyPair pair = generator.generateKeyPair();
+
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+
+        cipher.init(Cipher.ENCRYPT_MODE, pair.getPublic());
+        byte[] encrypted = cipher.doFinal(text.getBytes());
+
+        String encoded = Base64.getEncoder().encodeToString(encrypted);
+        System.out.println("Encrypted: " + encoded);
+
+        cipher.init(Cipher.DECRYPT_MODE, pair.getPrivate());
+        byte[] decrypted = cipher.doFinal(encrypted);
+
+        System.out.println("Decrypted: " + new String(decrypted));
+    }
+}
+
+// Enter text: Hello
+// Encrypted: (long encoded ciphertext)
+// Decrypted: Hello

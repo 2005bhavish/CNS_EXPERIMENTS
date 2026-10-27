@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class SubstitutionCipher {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter text: ");
+        String text = sc.nextLine();
+
+        String encrypted = "";
+        String decrypted = "";
+
+        for (char c : text.toCharArray()) {
+            if (c >= 'A' && c <= 'Z')
+                encrypted += (char) ('Z' - (c - 'A'));
+            else if (c >= 'a' && c <= 'z')
+                encrypted += (char) ('z' - (c - 'a'));
+            else
+                encrypted += c;
+        }
+
+        for (char c : encrypted.toCharArray()) {
+            if (c >= 'A' && c <= 'Z')
+                decrypted += (char) ('Z' - (c - 'A'));
+            else if (c >= 'a' && c <= 'z')
+                decrypted += (char) ('z' - (c - 'a'));
+            else
+                decrypted += c;
+        }
+
+        System.out.println("Encrypted: " + encrypted);
+        System.out.println("Decrypted: " + decrypted);
+    }
+}
+
+// Enter text: HELLO
+// Encrypted: SVOOL
+// Decrypted: HELLO

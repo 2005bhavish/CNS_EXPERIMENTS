@@ -1,0 +1,25 @@
+import java.security.MessageDigest;
+import java.util.Scanner;
+
+public class MD5Example {
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter text: ");
+        String text = sc.nextLine();
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] digest = md.digest(text.getBytes());
+
+        String result = "";
+
+        for (byte b : digest) {
+            result += String.format("%02x", b & 0xff);
+        }
+
+        System.out.println("MD5 Digest: " + result);
+    }
+}
+
+// Enter text: Hello
+// MD5 Digest: 8b1a9953c4611296a827abf8c47804d7

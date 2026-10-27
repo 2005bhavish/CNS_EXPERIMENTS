@@ -1,0 +1,35 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class DiffieHellman {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        BigInteger p = BigInteger.valueOf(23);
+        BigInteger g = BigInteger.valueOf(5);
+
+        System.out.print("Enter Alice's private key: ");
+        BigInteger a = sc.nextBigInteger();
+
+        System.out.print("Enter Bob's private key: ");
+        BigInteger b = sc.nextBigInteger();
+
+        BigInteger A = g.modPow(a, p);
+        BigInteger B = g.modPow(b, p);
+
+        BigInteger keyA = B.modPow(a, p);
+        BigInteger keyB = A.modPow(b, p);
+
+        System.out.println("Alice's public key: " + A);
+        System.out.println("Bob's public key: " + B);
+        System.out.println("Alice's shared key: " + keyA);
+        System.out.println("Bob's shared key: " + keyB);
+    }
+}
+
+// Enter Alice's private key: 6
+// Enter Bob's private key: 15
+// Alice's public key: 8
+// Bob's public key: 19
+// Alice's shared key: 2
+// Bob's shared key: 2
